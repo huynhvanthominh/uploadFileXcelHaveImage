@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    @{
+    ViewBag.Title = "Upload Excel File";
+}
+
+<h2>Upload Excel File</h2>
+
+<form asp-action="Upload" asp-controller="Home" method="post" enctype="multipart/form-data">
+    <div>
+        <label for="excelFile">Choose Excel File:</label>
+        <input type="file" name="excelFile" id="excelFile" accept=".xlsx, .xls" required />
+    </div>
+    <br />
+    <button type="submit">Upload</button>
+</form>
+
+</div>

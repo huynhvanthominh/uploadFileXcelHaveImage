@@ -1,0 +1,33 @@
+@using xcelHaveImage.Controllers;
+@model IEnumerable<ExcelRecord>
+
+@{
+    ViewData["Title"] = "Excel Records";
+}
+
+<h2>Excel Records</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var record in Model)
+        {
+            <tr>
+                <td>@record.Id</td>
+                <td>@record.Name</td>
+                 <td>
+                    @if (!string.IsNullOrEmpty(record.Description))
+                    {
+                        <img src="@record.Description" alt="Image" width="100" />
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
