@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/erichuynh/Documents/test/xcelHaveImage/xcelHaveImage.csproj": {}
+    "C:\\Users\\minh.hvt\\Documents\\dotnet\\uploadFileXcelHaveImage\\xcelHaveImage.csproj": {}
   },
   "projects": {
-    "/Users/erichuynh/Documents/test/xcelHaveImage/xcelHaveImage.csproj": {
+    "C:\\Users\\minh.hvt\\Documents\\dotnet\\uploadFileXcelHaveImage\\xcelHaveImage.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/erichuynh/Documents/test/xcelHaveImage/xcelHaveImage.csproj",
+        "projectUniqueName": "C:\\Users\\minh.hvt\\Documents\\dotnet\\uploadFileXcelHaveImage\\xcelHaveImage.csproj",
         "projectName": "xcelHaveImage",
-        "projectPath": "/Users/erichuynh/Documents/test/xcelHaveImage/xcelHaveImage.csproj",
-        "packagesPath": "/Users/erichuynh/.nuget/packages/",
-        "outputPath": "/Users/erichuynh/Documents/test/xcelHaveImage/obj/",
+        "projectPath": "C:\\Users\\minh.hvt\\Documents\\dotnet\\uploadFileXcelHaveImage\\xcelHaveImage.csproj",
+        "packagesPath": "C:\\Users\\minh.hvt\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\minh.hvt\\Documents\\dotnet\\uploadFileXcelHaveImage\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/erichuynh/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\minh.hvt\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -36,16 +36,29 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "direct"
-        }
+          "auditMode": "all"
+        },
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Aspose.Cells": {
+              "target": "Package",
+              "version": "[24.11.0, )"
+            },
             "EPPlus": {
               "target": "Package",
-              "version": "[7.3.1, )"
+              "version": "[7.5.1, )"
+            },
+            "Microsoft.Office.Interop.Excel": {
+              "target": "Package",
+              "version": "[15.0.4795.1001, )"
+            },
+            "iTextSharp": {
+              "target": "Package",
+              "version": "[5.5.13.4, )"
             }
           },
           "imports": [
@@ -59,15 +72,36 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[8.0.11, 8.0.11]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[8.0.11, 8.0.11]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[8.0.11, 8.0.11]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[8.0.11, 8.0.11]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
             },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
+            },
+            "Microsoft.WindowsDesktop.App.WindowsForms": {
+              "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

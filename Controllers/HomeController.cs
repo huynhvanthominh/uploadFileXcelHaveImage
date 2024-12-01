@@ -1,9 +1,14 @@
 using System.Diagnostics;
+using iTextSharp.text.pdf;
+using iTextSharp.text.pdf.parser;
 using Microsoft.AspNetCore.Mvc;
 using OfficeOpenXml;
 using OfficeOpenXml.Drawing;
 using xcelHaveImage.Models;
-
+using Excel = Microsoft.Office.Interop.Excel;
+using Path = System.IO.Path;
+using System.Windows.Forms;
+using Aspose.Cells;
 namespace xcelHaveImage.Controllers;
 
 public class HomeController : Controller
@@ -39,12 +44,39 @@ public class HomeController : Controller
   [HttpPost]
   public async Task<IActionResult> Upload(IFormFile excelFile)
   {
+    var records = new List<ExcelRecord>();
+
+    if (excelFile == null || excelFile.Length == 0)
+      return BadRequest("File is not uploaded");
+
+    string tempFilePath = Path.GetTempFileName();
+
+    // Save the uploaded file to a temporary location
+    using (var stream = new FileStream(tempFilePath, FileMode.Create))
+    {
+      excelFile.CopyTo(stream);
+    }
+
+    string outputFolderPath = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "pdfs");
+    Directory.CreateDirectory(outputFolderPath);
+    Console.WriteLine($"PDF extracted to: {outputFolderPath}");
+    ExtractEmbeddedObjects(tempFilePath, outputFolderPath);
+
+    return View("DisplayRecords", records); // Pass the records to a view named "DisplayRecords"
+
+
+  }
+
+
+
+  public async Task<IActionResult> test1(IFormFile excelFile)
+  {
     if (excelFile == null || excelFile.Length == 0)
     {
       ViewBag.Message = "Please select an Excel file.";
       return View();
     }
-    string imagesPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images");
+    string imagesPath = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images");
     if (!Directory.Exists(imagesPath))
     {
       Directory.CreateDirectory(imagesPath);
@@ -77,7 +109,7 @@ public class HomeController : Controller
               {
                 // Save the image to the server
                 string imageName = $"image_{row - 1}.png";
-                string imagePath = Path.Combine(imagesPath, imageName);
+                string imagePath = System.IO.Path.Combine(imagesPath, imageName);
 
                 using (var imageStream = new FileStream(imagePath, FileMode.Create))
                 {
@@ -93,8 +125,58 @@ public class HomeController : Controller
         }
       }
     }
-
     return View("DisplayRecords", records); // Pass the records to a view named "DisplayRecords"
+  }
+
+
+  public async Task<IActionResult> test2(IFormFile excelFile)
+  {
+    if (excelFile == null || excelFile.Length == 0)
+      return BadRequest("File is not uploaded");
+
+    // string tempFilePath = Path.GetTempFileName();
+
+    // // Save the uploaded file to a temporary location
+    // using (var stream = new FileStream(tempFilePath, FileMode.Create))
+    // {
+    //   excelFile.CopyTo(stream);
+    // }
+
+    // string outputFolderPath = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images");
+    // Directory.CreateDirectory(outputFolderPath);
+
+    // ExtractEmbeddedObjects(tempFilePath, outputFolderPath);
+
+    return Ok($"Embedded files extracted to: {"outputFolderPath"}");
+  }
+
+  private void ExtractEmbeddedObjects(string excelFilePath, string outputFolderPath)
+  {
+
+        // Output directory to save extracted OLE objects
+
+        // Load the Excel workbook
+        Workbook workbook = new Workbook(excelFilePath);
+
+        // Loop through all worksheets
+        foreach (Worksheet worksheet in workbook.Worksheets)
+        {
+            Console.WriteLine($"Processing sheet: {worksheet.Name}");
+
+            // Loop through all OLE objects in the worksheet
+            foreach (Aspose.Cells.Drawing.OleObject oleObject in worksheet.OleObjects)
+            {
+                // Generate a unique file name for the OLE object
+                string oleFileName = Path.Combine(outputFolderPath, oleObject.Name + ".pdf");
+            
+                // Save the OLE object data to a file
+                System.IO.File.WriteAllBytes(oleFileName, oleObject.ObjectData);
+
+                Console.WriteLine($"Saved OLE object: {oleFileName}");
+            }
+        }
+
+        Console.WriteLine("OLE objects extraction completed.");
   }
 }
 

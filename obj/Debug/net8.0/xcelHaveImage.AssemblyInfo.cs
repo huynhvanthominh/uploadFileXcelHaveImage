@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("xcelHaveImage")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2eaee99ba9f65b09dfa4cb895bab631511648802")]
 [assembly: System.Reflection.AssemblyProductAttribute("xcelHaveImage")]
 [assembly: System.Reflection.AssemblyTitleAttribute("xcelHaveImage")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
